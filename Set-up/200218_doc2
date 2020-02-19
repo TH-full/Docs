@@ -1,0 +1,130 @@
+@@@ 인코딩 깨질 때.
+https://gangzzang.tistory.com/entry/%EC%9D%B4%ED%81%B4%EB%A6%BD%EC%8A%A4-%EA%B0%9C%EB%B0%9C%ED%99%98%EA%B2%BD-UTF8-%EC%9D%B8%EC%BD%94%EB%94%A9-%EC%84%A4%EC%A0%95
+
+
+
+@@@ DI
+	- 객체지향 디자인 원칙에서 객체간의 결합도는 약할수록 좋다.
+	- DI는 결합도를 약하도록 만들어준다.
+	- 각 클래스간의 의존관계를 Bean 설정 정보(bean.xml)를 바탕으로 컨테이너가 자동으로 연결해 주는 것
+	- 그래서 개발자들은 단지 빈 설정에서 의존관계가 필요하다는 정보를 추가해주면 된다.
+	- 객체의 레퍼런스를 컨테이너로부터 주입받아서, 실행시에 동적으로 의존관계가 생성되어 처리된다.
+	- 코드가 단순해지고 컴포넌트간의 결합도가 낮아진다.
+	
+	- setter injection: 의존성을 입력 받는 setter메소드를 통해 의존성을 주입.
+		<beans id="setTest1" class="com.taehwan.beans.TestBean">
+			<property name="data1" value="100"/>
+			<property name="data2" value="100.75"/>
+			<property name="data3" value="true"/>
+			<property name="data4" value="문자문자"/>
+			<property name="data5" ref="data_bean"/>
+		</beans>			
+	
+	- constructor injection: 필요한 의존성을 포함한 클래스의 생성자를 만들고 의존성을 주입.
+	- method injection: 의존성을 입력 받는 일반 메소드를 만들어 의존성을 주입.
+	
+	
+	
+@@@ Java Collection FrameWork.
+	- Bean을 정의할 때 주입해야 하는 멤버가 컬렉션인 경우, 컬렉션이 관리해야 할 객체를 초기에 설정할 수 있음.
+	- List, Map(k,v), set, property를 사용합니다.
+	- Collection이란 순서나 집합적인 저장공간을 의미합니다.
+	- List: 순서가 있는 저장공간, 데이터의 중복을 허용.
+		Stack: LIFO, FILO: 고정적인 메모리 크기를 지닌다.
+		Vector: 가변적인 메모리 크기를 갖는다. 동기화를 보장한다.(Sync)
+		ArrayList: 아주 큰 데이터를 처리하는 저장공간.동기화를 보장하진 않지만 속도가 빠름. 가변적.
+					단방향 구조여서 순차적인 접근이 가능함.
+		LinkedList: 양방향 구조, 삽입과 삭제가 용이함.
+					stack, queue, dequeue 만들기 위한 용도로 사용함.
+					운영체제, c, c#, .NET 개발에 사용됨.
+	- Set: List구조의 반대. 순서에 개념이 없음. 데이터의 중복을 허용하지 않는다. 
+		HashSet: set구조의 대표적인 클래스 구조. set이라 하면 보통 HashSet 가장 빠른 임의 접근 속도.
+				  순서를 예측할 수 없다.
+		LinkedHashSet: 추가된 순서 또는 가장 최근에 접근한 순서대로 접근을 한다.
+		TreeSet: 정렬된 순서대로 보관하며, 정렬 방법을 지정해 줄 수 있다.
+		SortedSet: 정렬된 데이터 상태를 의미한다. 위 세 개의 set과 같이 사용된다. 메소드처럼. (메소든가?)
+	- Map(key, value): key는 유일한 성격을 지님
+				HashTable: 동기화 보장, HashMap보다 느리지만 동기화가 지원된다.
+				key와 value로 null이 허용되지 않음.
+				HashMap: 동기화 보장, TreeSet과 연관되어 있고 같이 쓰인다.
+					Map인터페이스를 구현하기 위해서 해쉬 테이블을 사용한 클래스. 중복을 허용하지 않는다.
+					순서도 예측할 수 없다. key와 value로 null이 허용된다.
+				TreeMap: 이진검색트리의 형태로 키와 값의 쌍으로 이루어진 데이터로 저장.
+					정렬된 순서로 키와 값을 저장하므로 검색이 빠르다. 그러나 저장시에는 오름차순을 하기 때문에
+					시간이 많이 소요된다는 단점이 있다.
+				LinkedHashMap: hashMap을 상속받아서 처리합니다.
+					Map에 있는 Entry들의 연결 리스트를 유지하므로 입력한 순서대로 반복이 가능합니다.
+				SortedMap: SortedSet과 같다. TreeMap과 많이 사용된다.
+	- Property: Spring 3.x버전에 사용됨. (?)
+				HashTable의 상속을 받아 구현.
+				HashTable은 key와 value를 (Object, Object) 형태로 저장함.
+				Property는 (String, String)형태로 저장함.
+				
+	+ 나중에는 메모리 싸움이기 때문에, C or C++을 꼭 심도있게 공부해야 한다.
+	
+
+
+@@@ AutoWire: 자동주입
+	- 기존에 생성자 주입, setter주입 등을 이용했었는데, 좀 더 편리하게 주입하기 위하여 사용함.
+	- 자동 주입은 이름, 생성자를 이용하여 할 수 있다.
+	- 자동 주입은 객체 주소 값만 가능하므로 참조 변수를 제외한 나머지들은 직접 명시해 주어야 함.
+	  (문자열, 정수형, 실수형 등)
+	
+	- (기존)이름을 이용하여 주입하는 방법.
+		<bean id="data1" class="com.tistory.beans.DataBean" />
+		
+		TestBean.java
+			private DataBean data1;
+			private DataBean data2;
+	- 자동 주입을 이용하는 방법.
+		<bean id="data1" class="com.tistory.beans.DataBean" autowire="byName"/>
+		
+		<bean class="com.tistory.beans.TestBean" /> 
+		
+		<!-- 자동 주입 Bean 정의 -->
+		<bean id="data1" class="com.tistory.beans.DataBean" />
+		<bean id="data2" class="com.tistory.beans.DataBean" />
+	
+	- 타입을 이용하여 자동주입.
+		byType: Bean객체의 프로퍼티 타입과 정의된 빈의 타입이 일치할 경우에 주입한다.
+				이 때, 동일 타입의 Bean이 두 개이상 정의되어 있으면 오류가 발생한다.
+				
+		<bean id='data1' class='com.taehwan.beans.dataBean'/>
+		
+		DataBean.java
+		
+		private DataBean data1;
+		private DataBean data2;
+		
+	- 생성자를 이용하여 자동주입.
+	
+	
+	
+@@@ Bean
+	- @Bean 어노테이션은 Bean객체를 정의할 때 사용함.
+	- 메소드의 이름은 빈의 이름이 된다.	
+	- @Bean(name=이름): bean의 이름을 새롭게 정의한다.
+	- @Lazy: lazy-init속성을 지정.
+	- @Scope: bean의 scope속성을 지정.
+	- @primary: primary 속성을 지정.
+	
+	
+	
+
+		
+		
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
