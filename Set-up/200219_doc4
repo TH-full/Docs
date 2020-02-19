@@ -1,0 +1,57 @@
+@@@ Spring mvc project
+
+@@@ 버전 맞추기.
+	- 스프링 버전 업.
+	- 자바 버전 업.
+	
+@@@ 인코딩 설정하기. web.xml에 추가해야함.
+	<!-- @@@ filter setting -->
+	<filter> 
+	    <filter-name>encodingFilter</filter-name> 
+	    <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class> 
+	    <init-param> 
+	       <param-name>encoding</param-name> 
+	       <param-value>UTF-8</param-value> 
+	    </init-param> 
+	    <init-param> 
+	       <param-name>forceEncoding</param-name> 
+	       <param-value>true</param-value> 
+	    </init-param> 
+ 	</filter> 
+	 <filter-mapping> 
+	    <filter-name>encodingFilter</filter-name> 
+	    <url-pattern>/*</url-pattern> 
+	 </filter-mapping> 
+	 
+	 Spring Web Project - POST 방식에서의 한글 깨짐 해결 방법
+	역할
+	- 브라우저 —> 요청정보 Body 데이터 —UTF8 인코딩—> Java 단에서의 데이터 처리
+	- CharacterEncodingFilter
+	- HTTP상에서 주고 받는 데이터의 헤더값을 UTF-8로 인코딩
+	- Servlet에서의 request.setCharacterEncoding("utf-8");
+	- POST로 인코딩 데이터를 받는 Servlet에서의 request.setCharacterEncoding("utf-8"); 처리와 동일한 기능을 수행한다.
+		즉, 이 Filter를 설정하면 POST 요청을 보내는(Submit) 모든 Controller(Servlet) 마다 request.setCharacterEncoding("utf-8"); 내용을 추가하지 않아도 된다.
+		또한 DB에서 불러올 한글 데이터들의 한글 깨짐 현상을 해결한다.
+	사용
+	- 해당 filter를 매핑할 때 모든 URL에 대해 인코딩될 수 있도록 /*와 같이 url-pattern을 설정한다.
+	- 주의!) Spring Security 설정이 있는 경우,
+	- 한글 필터 설정이 springSecurityFilterChain 앞에 위치해야 한다.
+	
+@@@ VO작성
+	- getter setter작성
+	- DB와 필드 변수 이름을 같게 해야 함.
+	
+@@@ DB설정
+	- mvn에서 spring jdbc
+	<!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
+	<dependency>
+	    <groupId>org.springframework</groupId>
+	    <artifactId>spring-jdbc</artifactId>
+	    <version>5.2.2.RELEASE</version>
+	</dependency>
+		  	
+	https://offbyone.tistory.com/18 여기에 나와있음 
+	욕나온다진짜 ...
+	
+	
+	
