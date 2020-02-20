@@ -1,6 +1,17 @@
 @@@ 맥북 이클립스 프로젝트 한글 깨질 때.
 	- 역으로 UTF-8을 바꿔줘야 함.
 
+@@@ 인코딩 깨질 때.
+	- General-> Content Type-> java class file 선택후 UTF-8입력
+	- General-> Workspace
+	- General-> Editor-> Text Editor-> Spelling
+	- 메뉴 -> window -> preferences-> general -> content types -> text -> java source file -> 
+	  default encoding: MS949로 되어 있으면 utf-8로, UTF-8로 되어 있는 경우는 MS949로 수정후 -> update
+	- 링크: HTML, CSS, XML도 깨질 때 추가적으로 아래 링크에서 확인.
+		https://gangzzang.tistory.com/entry/%EC%9D%B4%ED%81%B4%EB%A6%BD%EC%8A%A4-
+		%EA%B0%9C%EB%B0%9C%ED%99%98%EA%B2%BD-UTF8-%EC%9D%B8%EC%BD%94%EB%94%A9-%EC%84%A4%EC%A0%95
+	- 4번째 방법으로 해결했음.
+
 @@@ 깃 저장소 프로젝트 임포트 할 때.
 	- REF: https://okky.kr/article/212128
 	- properties> project Facets > Dynamic Web Module
@@ -21,7 +32,7 @@
  	- 변경할 변수 클릭후 Ctrl + Shift + R
  	
 @@@ 프로젝트 자바 버전 매칭
-	- 프로젝트 우 클릭 -> 프로퍼티 -> 페이싯
+	- 프로젝트 우 클릭 -> 프로퍼티 -> facets
 	- 프로젝트 우 클릭 -> 프로퍼티 -> 컴파일러
 	- 프로젝트 우 클릭 -> 프로퍼티 -> 빌드 패스
 	
