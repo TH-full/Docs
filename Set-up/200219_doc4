@@ -1,9 +1,3 @@
-@@@ Spring mvc project
-
-@@@ 버전 맞추기.
-	- 스프링 버전 업.
-	- 자바 버전 업.
-	
 @@@ 인코딩 설정하기. web.xml에 추가해야함.
 	<!-- @@@ filter setting -->
 	<filter> 
@@ -51,7 +45,84 @@
 	</dependency>
 		  	
 	https://offbyone.tistory.com/18 여기에 나와있음 
-	욕나온다진짜 ...
+	
+@@@ Setting.
+	- Spring jdbc (maven) 버전 관리시에 스프링과 이름 같은 것 주의. 
+	- Ojdbc6: Below jdk 1.8version / Ojdbc5,14g: under 1.7version / 12c : below 1.9
+		오라클 jdbc는 저작권 문제로 인해서 레파지토리를 따로 지정해줘야 한다.
+		https://search.maven.org/artifact/org.zenframework.z8.dependencies.commons/ojdbc6/2.0/pom
+		Or MVN
+	- Apache Commons DBCP (DataBaseConnectionPool의 약자)
+	- 프로젝트 -> 프로퍼티에서 facets, compiler, build path 셋 다 버전 확인
+	- 다 설정 후 프로젝트 우 클릭 후 메이븐 -> 업데이트
+	- 서블릿을 변경하면 web.xml의 DTD부분도 수정해주어야 한다. 
+	
+@@@ pom.xml
+	<repositories>
+	  <repository>
+	   <id>oracle</id>
+	   <url>http://maven.jahia.org/maven2</url>
+	  </repository>
+	</repositories>
+
+	<!-- SPRING CONTEXT -->
+	<dependency>
+	    <groupId>org.springframework</groupId>
+	    <artifactId>spring-context</artifactId>
+	    <version>${org.springframework-version}</version>
+	</dependency>
+	<!-- SLF4J -->
+	<dependency>
+	    <groupId>org.slf4j</groupId>
+	    <artifactId>slf4j-api</artifactId>
+	    <version>${org.slf4j-version}</version>
+	</dependency>	
+	<!-- LOGBACK -->
+	<dependency>
+	    <groupId>ch.qos.logback</groupId>
+	    <artifactId>logback-classic</artifactId>
+	    <version>${ch.qos.logback-version}</version>
+	    <scope>runtime</scope>
+	</dependency>	
+	<!-- ASPECT J -->
+	<dependency>
+	    <groupId>org.aspectj</groupId>
+	    <artifactId>aspectjweaver</artifactId>
+	    <version>${org.aspectj-version}</version>
+	</dependency>	
+	<!-- JAVAX ANNOTATION -->
+	<dependency>
+	    <groupId>javax.annotation</groupId>
+	    <artifactId>javax.annotation-api</artifactId>
+	    <version>${javax.annotation-version}</version>
+	</dependency>
+	<!-- SPRING JDBC-->
+	<dependency>
+	    <groupId>org.springframework</groupId>
+	    <artifactId>spring-jdbc</artifactId>
+	    <version>5.2.3.RELEASE</version>
+	</dependency>
+	<!-- ORACLE JDBC6 -->
+	<dependency>
+	    <groupId>com.oracle</groupId>
+	    <artifactId>ojdbc6</artifactId>
+	    <version>12.1.0.2</version>
+	</dependency>		
+	<!-- DPCP -->
+	<dependency>
+	    <groupId>org.apache.commons</groupId>
+	    <artifactId>commons-dbcp2</artifactId>
+	    <version>2.1.1</version>
+	</dependency>			
+		
+@@@ @Component
+	- Bean Configuration 파일에 Bean을 등록하지 않아도 자동으로 등록이 되도록 할 때 사용한다.
+	- @component 개발자가 클래스의 코드를 수정 할 수 있는 경우에 사용한다.
+	- @Bean: 개발자가 클래스의 코드를 수정할 수 없는 경우에 사용한다.
+		같은 클래스 타입의 Bean을 여러 개 등록하는 경우에 이용한다.
+	- xml을 이용하는 방식 혹은 Bean configuration class파일을 만드는 방식.		
+		
+		
 	
 	
 	
