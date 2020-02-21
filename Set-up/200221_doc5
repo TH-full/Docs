@@ -1,0 +1,63 @@
+@@@ MyBatis
+	- www.mybatis.org => blog.mybatis.org
+	- 자바 객체를 SQL문 사이에 자동 매핑을 지원하는 Object Mapper이다.
+	- SQL을 별도의 파일로 분리해서 관리하게 해준다.
+	- 객체와 SQL사이의 매개체로 하여 매핑 작업을 자동으로 해준다.
+	
+	- JPA(Java Persistence API), Hibernate처럼 새로운 DB 프로그래밍 패러다임을 익혀야 하는 부담이 없어,
+	    개발자가 익숙한 SQL을 그대로 이용하면서 JDBC코드 작성의 불편함을 제거해주고, 
+	    도메인 객체나 VO객체를 중심으로 개발이 가능하다는 장점을 갖고 있다.
+	    
+	- SQL에 변경이 있을 때마다 자바 코드를 수정하거나 컴파일 하지 않아도 됨.
+	- SQL 작성과 관리 또는 검토를 DBA와 같은 개발자가 아닌 다른 사람에게 맡길 수도 있다.
+	- 다양한 언어로도 구현이 가능하다. => Java, C#, .NET, RUBY
+	
+	- 마이바티스와 스프링의 중요 컴포넌트 : 아키텍처 설계
+	- Service -> (Maven)Repository(Mapper) -> MyBatis -> MyBatis-Spring -> JDBC Basic APIs,
+	  DataSource -> JDBC Driver -> DB
+	  
+	- 주요 컴포넌트 작업 순서
+	0) Application
+	1) SqlSession Factory Builder
+	2) MyBatis Config File
+	3) SqlSettion factory: SqlSession을 생성함.
+		- Spring Bean으로 등록하여야 한다.
+	4) SqlSession: 핵심적인 역할. SQL이나 트랜잭션 관리를 실행함.
+		- SQL 객체는 Thread-Safe하지 않으므로 Thread마다 필요에 따라 생성함.
+	5) Mapping FIle: SQL문과 OR Mappring을 설정함.
+		- SqlSessionTemplate: Spring Bean 설정.
+	
+	- MyBatis-Spring: SqlMapConfig.xml + SqlSession FactoryBean + SqlSessionTemplate
+		1) mapping File(user.xml) : SQL문과 OR Mapping설정
+		2) Spring Bean 설정파일 (bean.xml):
+			- SqlSessionFactoryBean을 Bean으로 등록할 때 DataSource정보와 MyBatis Config파일정보,
+			그리고 Mapping파일의 정보를 같이 설정한다, SqlSessionTemplate을 Bean으로 등록한다.
+	
+	- Mapper XML 파일
+		마이바티스의 가장 큰 장점: 매핑파일
+		코드의 감소 JDBC에 비해 95%
+		목적: SQL작성에 집중할 수 있도록 만들어짐.
+		CRUD의 기능.
+		
+@@@ MyBatis Setting
+	- MVN에서 MyBatis, MyBatis-Spring 2가지 dependency 추가.
+	
+@@@ SpringBoot 톰캣 포트 변경.
+	- src/main/resource => application.properties에 추가. (처음엔 비어있음)
+	- server.port=8099
+
+다 좋은데 너무 진도가 느림. 에러 잡는데 시간이 오래걸림. 심도있게 설명할 시간이 없음. 
+기본적인 스프링의 개념을 모르는 사람이 많
+
+		 
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
